@@ -68,7 +68,7 @@ const opts = {
         message = "You are not prequalified for financing.";
         break;
       case "ABANDONED":
-        message = "You abandoned your prequalifcation attempt.";
+        message = "You abandoned your prequalification attempt.";
         break;
     }
 
@@ -85,4 +85,13 @@ const opts = {
 opts.customCSS =
   '@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);#bread-button,body,html{height:100%;margin:0;width:100%}body{display:table}#bread-button{background:darkblue;color:#FFF;border-radius:6px;display:table-cell;font-family:Roboto,sans-serif;font-size:16px;text-align:center;vertical-align:middle;transition:all .3s ease}.bread-btn{cursor:pointer}#bread-button.bread-btn:hover{background:darkblue;}.bread-embed-inner,.bread-label .bread-embed-icon{display:inline-block}.bread-label .bread-embed-icon:after{background:rgba(255,255,255,.5);border-radius:50px;color:#333;content:"i";cursor:pointer;display:inline-block;line-height:1;margin-left:8px;padding:4px 9px}.bread-pot:before{content:"Pay Over Time"}.bread-btn .bread-as-low-as:before,.bread-label .bread-as-low-as:before{content:"As low as "}.bread-for:before{content:"For "} .bread-center{ color: red; } ';
 
-bread.checkout(opts);
+$(document).ready(() => {
+  const url = new URL(window.location.href);
+  const landing = url.searchParams.get("landing");
+
+  if (landing) {
+    bread.showCheckout(opts);
+  } else {
+    bread.checkout(opts);
+  }
+});
